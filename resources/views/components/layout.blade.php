@@ -52,7 +52,9 @@
 
 
     </header>
-    {{ $slot }}
+    <main class="container mx-auto">
+        {{ $slot }}
+    </main>
 </body>
 
 </html>

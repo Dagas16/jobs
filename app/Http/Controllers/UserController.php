@@ -36,8 +36,6 @@ class UserController extends Controller
             'loginpassword' => 'required'
         ]);
 
-        // return $incomingFields;
-
         if (auth()->attempt([
             'email' => $incomingFields['loginemail'],
             'password' => $incomingFields['loginpassword']
