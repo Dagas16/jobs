@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
+use App\Models\Company;
+use App\Models\Job;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $jobs = Job::leftJoin('companies', 'jobs.company_id', '=', 'companies.id')
+        ->select('jobs.*', 'companies.name as companyName')
+        ->get();
+    return view('home', ['jobs' => $jobs]);
 });
 
 Route::get("/login", function () {
@@ -26,7 +33,15 @@ Route::get("/register", function () {
     return view('register');
 });
 
+Route::get("/create-job", function () {
+    $companies = Company::all();
+    return view("createJob", ['companies' => $companies]);
+});
+
 
 Route::post("/register", [UserController::class, 'register']);
 Route::post("/logout", [UserController::class, 'logout']);
 Route::post("/login", [UserController::class, 'login']);
+
+// Job routes
+Route::post("/create-job", [JobController::class, 'createJob']);
