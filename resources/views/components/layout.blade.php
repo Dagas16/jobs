@@ -6,14 +6,14 @@
 </head>
 
 <body>
-    <header class="navbar bg-base-100">
+    <header class="navbar bg-base-200 mb-6">
         <div class="flex-1">
             <a class="btn btn-ghost normal-case text-xl font-extrabold" href="/">JOB <span
                     class="text-primary">LISTINGS</span></a>
         </div>
         <nav class="flex-none">
             <ul class="menu menu-horizontal px-1">
-                <li><a>Link</a></li>
+                <li><a href="/create-job">Create Job</a></li>
                 @guest
                     <li>
                         <a href="/login">Login</a>
