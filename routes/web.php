@@ -44,6 +44,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 
 // job routes
+
 Route::get('/job/{id}', function (Request $request, string $id) {
     // gets jobs with company name
     $job = Job::leftJoin('companies', 'jobs.company_id', '=', 'companies.id')
@@ -53,9 +54,17 @@ Route::get('/job/{id}', function (Request $request, string $id) {
     return view('job', ['job' => $job]);
 });
 
+Route::get("/job/{id}/success", function (Request $request, string $id) {
+    $job = Job::find($id);
+    return view('jobSuccess', ['job' => $job]);
+});
+
+
 Route::get('/create-job', function () {
     $companies = Company::all();
     return view('createJob', ['companies' => $companies]);
 });
 
+
 Route::post('/create-job', [JobController::class, 'createJob']);
+Route::post('/job/send-application/{id}', [JobController::class, 'sendApplication']);
