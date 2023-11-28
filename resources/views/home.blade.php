@@ -10,7 +10,9 @@
                             {{ $job['description'] }}
                         </p>
                         <div class="card-actions justify-end">
-                            <button class="btn btn-primary btn-sm group-hover:bg-accent">Apply</button>
+                            @if (Auth::check())
+                                <button class="btn btn-primary btn-sm">Apply</button>
+                            @endif
                         </div>
                     </div>
                 </div>
