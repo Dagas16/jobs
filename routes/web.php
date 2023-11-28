@@ -4,6 +4,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
 use App\Models\Company;
 use App\Models\Job;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| be assigned to the 'web' middleware group. Make something great!
 |
 */
 
@@ -25,23 +26,36 @@ Route::get('/', function () {
     return view('home', ['jobs' => $jobs]);
 });
 
-Route::get("/login", function () {
+
+
+// auth routes
+Route::get('/login', function () {
     return view('login');
 });
 
-Route::get("/register", function () {
+Route::get('/register', function () {
     return view('register');
 });
 
-Route::get("/create-job", function () {
-    $companies = Company::all();
-    return view("createJob", ['companies' => $companies]);
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/login', [UserController::class, 'login']);
+
+
+
+// job routes
+Route::get('/job/{id}', function (Request $request, string $id) {
+    // gets jobs with company name
+    $job = Job::leftJoin('companies', 'jobs.company_id', '=', 'companies.id')
+        ->select('jobs.*', 'companies.name as companyName')
+        ->where('jobs.id', $id)
+        ->first();
+    return view('job', ['job' => $job]);
 });
 
+Route::get('/create-job', function () {
+    $companies = Company::all();
+    return view('createJob', ['companies' => $companies]);
+});
 
-Route::post("/register", [UserController::class, 'register']);
-Route::post("/logout", [UserController::class, 'logout']);
-Route::post("/login", [UserController::class, 'login']);
-
-// Job routes
-Route::post("/create-job", [JobController::class, 'createJob']);
+Route::post('/create-job', [JobController::class, 'createJob']);
