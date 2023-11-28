@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         $incomingFields = $request->validate([
             'name' => ['required', 'min:3', 'max:25'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')],
             'password' => ['required', 'min:6', 'max:64'],
         ]);
 
@@ -39,10 +39,12 @@ class UserController extends Controller
         if (auth()->attempt([
             'email' => $incomingFields['loginemail'],
             'password' => $incomingFields['loginpassword']
-        ])) {
+            ])) {
             $request->session()->regenerate();
+            return redirect('/');
+        }else{
+            return redirect('/login');
         }
-
-        return redirect('/');
+        
     }
 }
