@@ -36,6 +36,12 @@
                                 <span class="badge">New</span>
                             </a>
                         </li>
+                        <li>
+                            <a class="justify-between" href="/my-applications">
+                                My Applications
+                                <span class="badge">New</span>
+                            </a>
+                        </li>
                         <li><a>Settings</a></li>
                         <li>
                             <form action="/logout" method="POST">
