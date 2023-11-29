@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ExperienceTypeEnum;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
 use App\Models\Company;
@@ -48,7 +49,9 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/profile', function (Request $request) {
     $id = Auth::id();
-    $experiences = User::find($id)->experiences;
+    $experiences["work"] = User::find($id)->experiences()->where("type", "work")->get();
+    $experiences["education"] = User::find($id)->experiences()->where("type", "education")->get();
+    $experiences["other"] = User::find($id)->experiences()->where("type", "other")->get();
     return view('profile', ['experiences' => $experiences]);
 });
 

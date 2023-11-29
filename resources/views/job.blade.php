@@ -24,7 +24,6 @@
                 @csrf
                 <div class="mb-5">
                     <textarea class="textarea textarea-bordered w-full" name="cover_letter" rows="10"></textarea>
-
                 </div>
                 <div class="card-actions justify-end">
                     <button class="btn btn-primary">Send</button>
