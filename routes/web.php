@@ -44,7 +44,15 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
+//profile
 
+Route::get('/profile', function (Request $request) {
+    $id = Auth::id();
+    $experiences = User::find($id)->experiences;
+    return view('profile', ['experiences' => $experiences]);
+});
+
+Route::post('/createExperience', [UserController::class, 'createExperience']);
 
 // job routes
 
@@ -74,6 +82,7 @@ Route::get('/my-applications', function (Request $request) {
     $applications = User::find($id)->jobApplications;
     return view('myApplications', ['applications' => $applications]);
 });
+
 
 
 Route::post('/create-job', [JobController::class, 'createJob']);
