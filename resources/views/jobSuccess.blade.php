@@ -9,7 +9,7 @@
                 </h2>
             </div>
             <div class="card-actions justify-center">
-                <button class="btn btn-primary btn-lg ">Go to my applications</button>
+                <a class="btn btn-primary btn-lg " href="/my-applications">Go to my applications</a>
 
             </div>
 
