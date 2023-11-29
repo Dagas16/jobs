@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Company;
 use App\Models\Job;
 use App\Models\JobApplication;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -68,8 +69,9 @@ Route::get('/create-job', function () {
 });
 
 Route::get('/my-applications', function (Request $request) {
+
     $id = Auth::id();
-    $applications = JobApplication::where('user_id', $id)->get();
+    $applications = User::find($id)->jobApplications;
     return view('myApplications', ['applications' => $applications]);
 });
 
