@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Experience;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -39,12 +40,35 @@ class UserController extends Controller
         if (auth()->attempt([
             'email' => $incomingFields['loginemail'],
             'password' => $incomingFields['loginpassword']
-            ])) {
+        ])) {
             $request->session()->regenerate();
             return redirect('/');
-        }else{
+        } else {
             return redirect('/login');
         }
-        
+    }
+
+    public function createExperience(Request $request)
+    {
+        $incomingFields = $request->validate([
+            'type' => 'required',
+            'title' => 'required',
+            'institution' => 'required',
+            'description' => 'required',
+            'start_date' => ["required", "date"],
+            'end_date' => ['nullable', 'date'],
+        ]);
+
+        $incomingFields["type"] = strip_tags($incomingFields["type"]);
+        $incomingFields["title"] = strip_tags($incomingFields["title"]);
+        $incomingFields["institution"] = strip_tags($incomingFields["institution"]);
+        $incomingFields["description"] = strip_tags($incomingFields["description"]);
+        $incomingFields["start_date"] = strip_tags($incomingFields["start_date"]);
+        // $incomingFields["end_date"] = strip_tags($incomingFields["end_date"]);
+        $incomingFields["user_id"] = auth()->id();
+
+        Experience::create($incomingFields);
+
+        return redirect('/profile');
     }
 }
