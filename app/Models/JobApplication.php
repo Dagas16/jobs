@@ -20,4 +20,9 @@ class JobApplication extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function job(): BelongsTo
+    {
+        return $this->belongsTo(Job::class);
+    }
 }

@@ -1,10 +1,21 @@
 <x-layout>
-    <div class="justify-center flex">
-        <h1 class="font-bold">My Applications</h1>
-        <ul class="">
-            @foreach ($applications as $application)
-                <li>{{ $application['cover_letter'] }}</li>
-            @endforeach
-        </ul>
+    <h1 class="font-bold text-4xl mb-10">My Applications</h1>
+    <div class="flex flex-col gap-10">
+        @foreach ($applications as $application)
+            <div class="card bg-base-200">
+                <div class="card-body ">
+                    <h2 class="card-title text-3xl font-bold">Position: <span
+                            class="text-secondary">{{ $application['job']['title'] }}</span></h2>
+                    <p class="mb-10">{{ $application['job']['description'] }}</p>
+                    <div class=" border-primary border-4 p-4 rounded-3xl">
+                        <h3 class="text-2xl font-bold">Your application</h3>
+                        <p>{{ $application['cover_letter'] }}
+                    </div>
+                </div>
+
+            </div>
+        @endforeach
+    </div>
+    </div>
     </div>
 </x-layout>
