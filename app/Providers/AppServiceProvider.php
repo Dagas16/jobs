@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::if('isRecruiter', function () {
+        Blade::if('isrecruiter', function () {
             $id = Auth::id();
             //sjekker om bruker er logget inn og hører til en bedrift
             if ($id == null || !User::find($id)->isRecruiter()) {
