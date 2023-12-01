@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\IsRecruiter;
+use App\Http\Middleware\IsUser;
+use App\Http\Middleware\Authenticate;
+use Illuminate\Auth\Events\Authenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +57,7 @@ Route::get('/profile', function (Request $request) {
     $experiences["education"] = User::find($id)->experiences()->where("type", "education")->get();
     $experiences["other"] = User::find($id)->experiences()->where("type", "other")->get();
     return view('profile', ['experiences' => $experiences]);
-});
+})->middleware(IsUser::class);
 
 Route::post('/createExperience', [UserController::class, 'createExperience']);
 
@@ -75,9 +79,10 @@ Route::get("/job/{id}/success", function (Request $request, string $id) {
 
 
 Route::get('/create-job', function () {
+
     $companies = Company::all();
     return view('createJob', ['companies' => $companies]);
-});
+})->middleware(IsRecruiter::class);
 
 Route::get('/my-applications', function (Request $request) {
 
@@ -86,7 +91,14 @@ Route::get('/my-applications', function (Request $request) {
     return view('myApplications', ['applications' => $applications]);
 });
 
-
-
 Route::post('/create-job', [JobController::class, 'createJob']);
 Route::post('/job/send-application/{id}', [JobController::class, 'sendApplication']);
+
+//dashboard
+
+Route::get('/dashboard', function (Request $request) {
+    $id = Auth::id();
+    $company = User::find($id)->company;
+    $company->listings;
+    return view('dashboard', ['company' => $company]);
+})->middleware(IsRecruiter::class);

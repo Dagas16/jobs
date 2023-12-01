@@ -13,7 +13,7 @@
         </div>
         <nav class="flex-none">
             <ul class="menu menu-horizontal px-1">
-                <li><a href="/create-job">Create Job</a></li>
+
                 @guest
                     <li>
                         <a href="/login">Login</a>
@@ -33,13 +33,18 @@
                         <li>
                             <a class="justify-between" href="/profile">
                                 Profile
-                                <span class="badge">New</span>
                             </a>
                         </li>
+                        @isRecruiter
+                            <li>
+                                <a class="justify-between" href="/dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+                        @endisRecruiter
                         <li>
                             <a class="justify-between" href="/my-applications">
                                 My Applications
-                                <span class="badge">New</span>
                             </a>
                         </li>
                         <li><a>Settings</a></li>
