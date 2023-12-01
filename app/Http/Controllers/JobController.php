@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\JobApplication;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -14,12 +16,12 @@ class JobController extends Controller
             "title" => "required",
             "description" => "required",
             "deadline" => ["required", "date"],
-            "company_id" => "required"
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['description'] = strip_tags($incomingFields['description']);
         $incomingFields['deadline'] = strip_tags($incomingFields['deadline']);
+        $incomingFields['company_id'] = User::where('id', Auth::user()->id)->select()->first()->company_id;
 
         Job::create($incomingFields);
         return redirect("/");

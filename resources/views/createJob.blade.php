@@ -26,16 +26,7 @@
                         <input type="date" name="deadline" class="input input-bordered">
                     </div>
 
-                    <div class="form-control">
-                        <label for="company_id" class="label">
-                            <span class="label-text">Company</span>
-                        </label>
-                        <select name="company_id" class="select select-bordered">
-                            @foreach ($companies as $company)
-                                <option value="{{ $company['id'] }}">{{ $company['name'] }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
 
                 </div>
 

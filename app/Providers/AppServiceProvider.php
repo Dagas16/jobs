@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::if('isRecruiter', function () {
+            $id = Auth::id();
+            //sjekker om bruker er logget inn og hører til en bedrift
+            if ($id == null || !User::find($id)->isRecruiter()) {
+                return false;
+            };
+            return true;
+        });
     }
 }

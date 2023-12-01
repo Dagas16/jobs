@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -51,6 +54,16 @@ class User extends Authenticatable
 
     public function experiences(): HasMany
     {
-        return $this->hasMany((Experience::class));
+        return $this->hasMany(Experience::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function isRecruiter(): bool
+    {
+        return User::where('id', Auth::user()->id)->whereNotNull('company_id')->exists();
     }
 }
