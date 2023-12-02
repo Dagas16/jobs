@@ -3,7 +3,68 @@
         <div class="card bg-base-200">
             <div class="card-body">
                 <h2 class="card-title text-4xl font-bold text-primary">Personalia</h2>
-                navn og sånt
+
+                <form action="/update-user" method="post" class="">
+                    @csrf
+                    <div class="form-control">
+                        <label for="type" class="label">
+
+                        </label>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">First name(s)</span>
+                        </label>
+                        <input type="text" name="first_name"
+                            class="input input-bordered @if ($errors->has('first_name')) input-error @endif"
+                            value="{{ $personalia->first_name }}">
+                        <div class="label">
+                            @if ($errors->has('first_name'))
+                                <span class="label-text-alt text-error">{{ $errors->first('first_name') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Last name</span>
+                        </label>
+                        <input type="text" name="last_name" value="{{ $personalia->last_name }}"
+                            class="input input-bordered @if ($errors->has('last_name')) input-error @endif">
+                        <div class="label">
+                            @if ($errors->has('last_name'))
+                                <span class="label-text-alt text-error">{{ $errors->first('last_name') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input type="text" name="email" value="{{ $personalia->email }}"
+                            class="input input-bordered @if ($errors->has('email')) input-error @endif">
+                        <div class="label">
+                            @if ($errors->has('email'))
+                                <span class="label-text-alt text-error">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Phone</span>
+                        </label>
+                        <input type="text" name="phone" value="{{ $personalia->phone }}"
+                            class="input input-bordered @if ($errors->has('phone')) input-error @endif">
+                        <div class="label">
+                            @if ($errors->has('phone'))
+                                <span class="label-text-alt text-error">{{ $errors->first('phone') }}</span>
+                            @endif
+                        </div>
+
+                    </div>
+                    <div class="card-actions mt-4 justify-end">
+                        <button type="submit" class="btn btn-accent">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="card bg-base-200">
@@ -34,7 +95,7 @@
                     @endif
                 @endforeach
 
-                <form action="/createExperience" method="post" class="">
+                <form action="/create-experience" method="post" class="">
                     @csrf
                     <div class="form-control">
                         <label for="type" class="label">
@@ -52,14 +113,14 @@
                         <label class="label">
                             <span class="label-text">Title</span>
                         </label>
-                        <input type="text" name="title" class="input input-bordered input-secondary">
+                        <input type="text" name="title" class="input input-bordered">
 
                     </div>
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Institution</span>
                         </label>
-                        <input type="text" name="institution" class="input input-bordered input-secondary">
+                        <input type="text" name="institution" class="input input-bordered">
 
                     </div>
                     <div class="form-control">
@@ -73,14 +134,14 @@
                         <label class="label">
                             <span class="label-text">Start Date</span>
                         </label>
-                        <input type="date" name="start_date" class="input input-bordered input-secondary">
+                        <input type="date" name="start_date" class="input input-bordered">
 
                     </div>
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">End Date</span>
                         </label>
-                        <input type="date" name="end_date" class="input input-bordered input-secondary">
+                        <input type="date" name="end_date" class="input input-bordered">
 
                     </div>
                     @if ($errors->any())
@@ -92,7 +153,9 @@
                             </ul>
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-accent">Lagre</button>
+                    <div class="card-actions mt-4 justify-end">
+                        <button type="submit" class="btn btn-accent">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>

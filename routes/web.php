@@ -54,13 +54,16 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/profile', function (Request $request) {
     $id = Auth::id();
+
+    $personalia = User::find($id);
     $experiences["work"] = User::find($id)->experiences()->where("type", "work")->get();
     $experiences["education"] = User::find($id)->experiences()->where("type", "education")->get();
     $experiences["other"] = User::find($id)->experiences()->where("type", "other")->get();
-    return view('profile', ['experiences' => $experiences]);
+    return view('profile', ['personalia' => $personalia], ['experiences' => $experiences]);
 })->middleware(IsUser::class);
 
-Route::post('/createExperience', [UserController::class, 'createExperience']);
+Route::post('/update-user', [UserController::class, 'updateUser']);
+Route::post('/create-experience', [UserController::class, 'createExperience']);
 
 // job routes
 

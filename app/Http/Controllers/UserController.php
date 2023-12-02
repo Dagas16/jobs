@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -62,6 +63,35 @@ class UserController extends Controller
         } else {
             return redirect()->back()->withInput($request->only("loginemail"))->withErrors(['approve' => 'Wrong email or password']);
         }
+    }
+
+    public function updateUser(Request $request)
+    {
+        $errorMessages = [
+            "first_name.required" => "First name is required",
+            "last_name.required" => "Last name is required",
+            "first_name.min" => "First name is too short",
+            "last_name.min" => "Last name is too short",
+            "first_name.max" => "First name is too long",
+            "last_name.max" => "Last name is too long",
+            "email.required" => "Email is required",
+            "email.email" => "Email must be a valid email",
+        ];
+
+        $user = User::find(Auth::id());
+        $incomingFields = $request->validate([
+            'first_name' => ['required', 'min:3', 'max:25'],
+            'last_name' => ['required', 'min:3', 'max:25'],
+            'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')->ignore($user->id)],
+            'phone' => 'required',
+        ], $errorMessages);
+
+        foreach ($incomingFields as $key => $val) {
+            $user->$key = $val;
+        }
+
+        $user->update();
+        return redirect()->back()->withInput();
     }
 
     public function createExperience(Request $request)
