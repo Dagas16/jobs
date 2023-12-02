@@ -67,13 +67,25 @@ class UserController extends Controller
 
     public function updateUser(Request $request)
     {
+        $errorMessages = [
+            "first_name.required" => "First name is required",
+            "last_name.required" => "Last name is required",
+            "first_name.min" => "First name is too short",
+            "last_name.min" => "Last name is too short",
+            "first_name.max" => "First name is too long",
+            "last_name.max" => "Last name is too long",
+            "email.required" => "Email is required",
+            "email.email" => "Email must be a valid email",
+        ];
+
         $user = User::find(Auth::id());
         $incomingFields = $request->validate([
             'first_name' => ['required', 'min:3', 'max:25'],
             'last_name' => ['required', 'min:3', 'max:25'],
             'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')->ignore($user->id)],
             'phone' => 'required',
-        ]);
+        ], $errorMessages);
+
         foreach ($incomingFields as $key => $val) {
             $user->$key = $val;
         }
