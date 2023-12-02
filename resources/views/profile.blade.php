@@ -52,7 +52,10 @@
                             </ul>
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-accent">Update</button>
+                    <div class="card-actions mt-4 justify-end">
+                        <button type="submit" class="btn btn-accent">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="card bg-base-200">
@@ -141,7 +144,9 @@
                             </ul>
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-accent">Submit</button>
+                    <div class="card-actions mt-4 justify-end">
+                        <button type="submit" class="btn btn-accent">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
