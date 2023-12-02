@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ExperienceTypeEnum;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
 use App\Models\Company;
@@ -66,7 +67,7 @@ Route::post('/createExperience', [UserController::class, 'createExperience']);
 Route::get('/job/{id}', function (Request $request, string $id) {
     // gets jobs with company name
     $job = Job::leftJoin('companies', 'jobs.company_id', '=', 'companies.id')
-        ->select('jobs.*', 'companies.name as companyName')
+        ->select('jobs.*', 'companies.name as company_name', 'companies.logo_path as company_logo_path')
         ->where('jobs.id', $id)
         ->first();
     return view('job', ['job' => $job]);
@@ -79,7 +80,6 @@ Route::get("/job/{id}/success", function (Request $request, string $id) {
 
 
 Route::get('/create-job', function () {
-
     $companies = Company::all();
     return view('createJob', ['companies' => $companies]);
 })->middleware(IsRecruiter::class);
@@ -102,3 +102,15 @@ Route::get('/dashboard', function (Request $request) {
     $listings = $company->listings;
     return view('dashboard', ['company' => $company]);
 })->middleware(IsRecruiter::class);
+
+Route::get('/create-company', function () {
+    $id = Auth::id();
+    $company = User::find($id)->company;
+    if ($company) {
+        return redirect('/dashboard');
+    }
+
+    return view('createCompany');
+});
+
+Route::post('/create-company', [CompanyController::class, 'createCompany']);

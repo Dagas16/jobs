@@ -6,15 +6,16 @@
                 {{ $job['description'] }}
             </div>
         </div>
-        <div class="card card-compact bg-base-200 shadow-xl">
+        <div class="card card-compact bg-base-200 shadow-xl w-96">
             <figure class="px-5 pt-5">
-                <img src="https://placehold.co/300x100" class="rounded-xl" />
+                <img src="{{ asset($job['company_logo_path']) }}" class="rounded-xl max-w-[300px] max-h-[100px]" />
             </figure>
             <div class="card-body item-center text-center">
-                <h2 class="text-xl text-bold">{{ $job['companyName'] }}</h2>
+                <h2 class="text-xl text-bold">{{ $job['company_name'] }}</h2>
             </div>
         </div>
     </div>
+
     <div class="card bg-base-200 shadow-xl p-6">
         <div class="card-body">
             <h2 class="card-title text-2xl font-bold mb-3">
