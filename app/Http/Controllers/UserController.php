@@ -60,7 +60,7 @@ class UserController extends Controller
             $request->session()->regenerate();
             return redirect('/');
         } else {
-            return redirect()->back()->withInput($request->only("email"))->withErrors(['approve' => 'Wrong email or password']);
+            return redirect()->back()->withInput($request->only("loginemail"))->withErrors(['approve' => 'Wrong email or password']);
         }
     }
 
