@@ -10,19 +10,37 @@
                             <label class="label">
                                 <span class="label-text">Name</span>
                             </label>
-                            <input name="name" type="text" class="input input-bordered">
+                            <input name="name" type="text"
+                                class="input input-bordered @if ($errors->has('name')) input-error @endif">
+                            <div class="label">
+                                @if ($errors->has('name'))
+                                    <span class="label-text-alt text-error">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text">Email</span>
                             </label>
-                            <input name="email" type="text" class="input input-bordered">
+                            <input name="email" type="text"
+                                class="input input-bordered @if ($errors->has('email')) input-error @endif">
+                            <div class="label">
+                                @if ($errors->has('email'))
+                                    <span class="label-text-alt text-error">{{ $errors->first('email') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text">Password</span>
                             </label>
-                            <input name="password" type="password" class="input input-bordered">
+                            <input name="password" type="password"
+                                class="input input-bordered @if ($errors->has('password')) input-error @endif">
+                            <div class="label">
+                                @if ($errors->has('password'))
+                                    <span class="label-text-alt text-error">{{ $errors->first('password') }}</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="card-actions flex items-center">
