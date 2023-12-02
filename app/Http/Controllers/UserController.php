@@ -91,7 +91,7 @@ class UserController extends Controller
         }
 
         $user->update();
-        return redirect()->back();
+        return redirect()->back()->withInput();
     }
 
     public function createExperience(Request $request)
