@@ -10,7 +10,7 @@
                             <label class="label">
                                 <span class="label-text">Name</span>
                             </label>
-                            <input name="name" type="text"
+                            <input name="name" type="text" value="{{ old('name') }}"
                                 class="input input-bordered @if ($errors->has('name')) input-error @endif">
                             <div class="label">
                                 @if ($errors->has('name'))
@@ -22,7 +22,7 @@
                             <label class="label">
                                 <span class="label-text">Email</span>
                             </label>
-                            <input name="email" type="text"
+                            <input name="email" type="text" value="{{ old('email') }}"
                                 class="input input-bordered @if ($errors->has('email')) input-error @endif">
                             <div class="label">
                                 @if ($errors->has('email'))

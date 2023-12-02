@@ -20,7 +20,7 @@
                             <label class="label">
                                 <span class="label-text">Email</span>
                             </label>
-                            <input name="loginemail" type="text"
+                            <input name="loginemail" type="text" value="{{ old('loginemail') }}"
                                 class="input input-bordered @if ($errors->has('loginemail')) input-error @endif">
                             <div class="label">
                                 @if ($errors->has('loginemail'))
