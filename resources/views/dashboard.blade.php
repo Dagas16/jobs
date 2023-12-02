@@ -4,17 +4,22 @@
         <div class="card bg-base-200">
             <div class="card-body">
                 <div class="card-title text-3xl font-bold text-secondary">{{ $company['name'] }}</div>
+                <div>
+                    <img src="{{ asset($company['logo_path']) }}" alt="logo" class="max-w-[300px] max-h-[100px]" />
+                </div>
                 <div class="mb-4">
                     <p>Welcome to the dashboard</p>
                 </div>
-                <div class="card-actionst">
-                    <a class="btn btn-secondary" href="/create-job">Create Job</a>
+                <div class="card-actions">
+                    <a class="btn btn-secondary">Edit company</a>
                 </div>
-                {{-- <div class="">{{ date_format(new DateTime($listing['deadline']), 'd/m/Y') }}</div> --}}
             </div>
         </div>
 
-        <h2 class="mt-5 text-3xl font-bold">Your listings</h2>
+        <div class="flex items-center mt-3">
+            <h2 class="text-3xl font-bold grow">Your listings</h2>
+            <a class="btn btn-secondary" href="/create-job">Create Job</a>
+        </div>
         @foreach ($company['listings'] as $listing)
             <div class="card bg-base-200">
                 <div class="card-body">

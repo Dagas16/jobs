@@ -41,12 +41,19 @@
                                     Dashboard
                                 </a>
                             </li>
+                        @else
+                            <li>
+                                <a class="justify-between" href="/my-applications">
+                                    My Applications
+                                </a>
+                            </li>
+                            <li>
+                                <a class="justify-between" href="/create-company">
+                                    Create company
+                                </a>
+                            </li>
                         @endisrecruiter
-                        <li>
-                            <a class="justify-between" href="/my-applications">
-                                My Applications
-                            </a>
-                        </li>
+
                         <li><a>Settings</a></li>
                         <li>
                             <form action="/logout" method="POST">

@@ -11,11 +11,22 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
+        $errorMessages = [
+            "name.required" => "Name is required",
+            "name.min" => "Name is too short",
+            "name.max" => "Name is too long",
+            "email.required" => "Email is required",
+            "email.email" => "Email must be a valid email",
+            "password.required" => "Password is required",
+            "password.min" => "Password is too short",
+            "password.max" => "Password is too long",
+        ];
+
         $incomingFields = $request->validate([
             'name' => ['required', 'min:3', 'max:25'],
             'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')],
             'password' => ['required', 'min:6', 'max:64'],
-        ]);
+        ], $errorMessages);
 
         $incomingFields['password'] = bcrypt($incomingFields['password']);
         $user = User::create($incomingFields);
@@ -32,10 +43,15 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        $errorMessages = [
+            "loginemail.required" => "Email is required",
+            "loginpassword.required" => "Password is required"
+        ];
+
         $incomingFields = $request->validate([
             'loginemail' => 'required',
             'loginpassword' => 'required'
-        ]);
+        ], $errorMessages);
 
         if (auth()->attempt([
             'email' => $incomingFields['loginemail'],
@@ -44,7 +60,7 @@ class UserController extends Controller
             $request->session()->regenerate();
             return redirect('/');
         } else {
-            return redirect('/login');
+            return redirect()->back()->withInput($request->only("loginemail"))->withErrors(['approve' => 'Wrong email or password']);
         }
     }
 
