@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h2 class="card-title text-4xl font-bold text-primary">Personalia</h2>
 
-                <form action="/updateUser" method="post" class="">
+                <form action="/update-user" method="post" class="">
                     @csrf
                     <div class="form-control">
                         <label for="type" class="label">
@@ -15,7 +15,7 @@
                         <label class="label">
                             <span class="label-text">First name(s)</span>
                         </label>
-                        <input type="text" name="first-names" class="input input-bordered"
+                        <input type="text" name="first_name" class="input input-bordered"
                             value="{{ $personalia->first_name }}">
 
                     </div>
@@ -23,7 +23,7 @@
                         <label class="label">
                             <span class="label-text">Last name</span>
                         </label>
-                        <input type="text" name="last-name" value="{{ $personalia->last_name }}"
+                        <input type="text" name="last_name" value="{{ $personalia->last_name }}"
                             class="input input-bordered">
 
                     </div>
@@ -83,7 +83,7 @@
                     @endif
                 @endforeach
 
-                <form action="/createExperience" method="post" class="">
+                <form action="/create-experience" method="post" class="">
                     @csrf
                     <div class="form-control">
                         <label for="type" class="label">

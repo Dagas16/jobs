@@ -63,7 +63,8 @@ Route::get('/profile', function (Request $request) {
     return view('profile', ['personalia' => $personalia], ['experiences' => $experiences]);
 })->middleware(IsUser::class);
 
-Route::post('/createExperience', [UserController::class, 'createExperience']);
+Route::post('/update-user', [UserController::class, 'updateUser']);
+Route::post('/create-experience', [UserController::class, 'createExperience']);
 
 // job routes
 

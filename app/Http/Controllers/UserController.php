@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -62,6 +63,23 @@ class UserController extends Controller
         } else {
             return redirect()->back()->withInput($request->only("loginemail"))->withErrors(['approve' => 'Wrong email or password']);
         }
+    }
+
+    public function updateUser(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $incomingFields = $request->validate([
+            'first_name' => ['required', 'min:3', 'max:25'],
+            'last_name' => ['required', 'min:3', 'max:25'],
+            'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')->ignore($user->id)],
+            'phone' => 'required',
+        ]);
+        foreach ($incomingFields as $key => $val) {
+            $user->$key = $val;
+        }
+
+        $user->update();
+        return redirect()->back();
     }
 
     public function createExperience(Request $request)
