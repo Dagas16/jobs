@@ -3,7 +3,56 @@
         <div class="card bg-base-200">
             <div class="card-body">
                 <h2 class="card-title text-4xl font-bold text-primary">Personalia</h2>
-                navn og sånt
+
+                <form action="/updateUser" method="post" class="">
+                    @csrf
+                    <div class="form-control">
+                        <label for="type" class="label">
+
+                        </label>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">First name(s)</span>
+                        </label>
+                        <input type="text" name="first-names" class="input input-bordered"
+                            value="{{ $personalia->first_name }}">
+
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Last name</span>
+                        </label>
+                        <input type="text" name="last-name" value="{{ $personalia->last_name }}"
+                            class="input input-bordered">
+
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input type="text" name="email" value="{{ $personalia->email }}"
+                            class="input input-bordered">
+
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Phone</span>
+                        </label>
+                        <input type="text" name="phone" value="{{ $personalia->phone }}"
+                            class="input input-bordered">
+
+                    </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <button type="submit" class="btn btn-accent">Update</button>
             </div>
         </div>
         <div class="card bg-base-200">
@@ -52,14 +101,14 @@
                         <label class="label">
                             <span class="label-text">Title</span>
                         </label>
-                        <input type="text" name="title" class="input input-bordered input-secondary">
+                        <input type="text" name="title" class="input input-bordered">
 
                     </div>
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Institution</span>
                         </label>
-                        <input type="text" name="institution" class="input input-bordered input-secondary">
+                        <input type="text" name="institution" class="input input-bordered">
 
                     </div>
                     <div class="form-control">
@@ -73,14 +122,14 @@
                         <label class="label">
                             <span class="label-text">Start Date</span>
                         </label>
-                        <input type="date" name="start_date" class="input input-bordered input-secondary">
+                        <input type="date" name="start_date" class="input input-bordered">
 
                     </div>
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">End Date</span>
                         </label>
-                        <input type="date" name="end_date" class="input input-bordered input-secondary">
+                        <input type="date" name="end_date" class="input input-bordered">
 
                     </div>
                     @if ($errors->any())
@@ -92,7 +141,7 @@
                             </ul>
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-accent">Lagre</button>
+                    <button type="submit" class="btn btn-accent">Submit</button>
                 </form>
             </div>
         </div>

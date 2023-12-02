@@ -50,13 +50,16 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 //profile
-
+//DB::table('users')->select('name', 'email')->where('id', $id)->get();
 Route::get('/profile', function (Request $request) {
     $id = Auth::id();
+    // $personalia['name'] = Auth::user()->name;
+    // $personalia['email'] = Auth::user()->email;
+    $personalia = User::find($id);
     $experiences["work"] = User::find($id)->experiences()->where("type", "work")->get();
     $experiences["education"] = User::find($id)->experiences()->where("type", "education")->get();
     $experiences["other"] = User::find($id)->experiences()->where("type", "other")->get();
-    return view('profile', ['experiences' => $experiences]);
+    return view('profile', ['personalia' => $personalia], ['experiences' => $experiences]);
 })->middleware(IsUser::class);
 
 Route::post('/createExperience', [UserController::class, 'createExperience']);
