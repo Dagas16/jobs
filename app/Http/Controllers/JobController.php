@@ -24,7 +24,7 @@ class JobController extends Controller
         $incomingFields['company_id'] = User::where('id', Auth::user()->id)->select()->first()->company_id;
 
         Job::create($incomingFields);
-        return redirect("/");
+        return redirect("/dashboard");
     }
 
     public function sendApplication(Request $request, string $id)

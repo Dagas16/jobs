@@ -35,13 +35,13 @@
                                 Profile
                             </a>
                         </li>
-                        @isRecruiter
+                        @isrecruiter
                             <li>
                                 <a class="justify-between" href="/dashboard">
                                     Dashboard
                                 </a>
                             </li>
-                        @endisRecruiter
+                        @endisrecruiter
                         <li>
                             <a class="justify-between" href="/my-applications">
                                 My Applications

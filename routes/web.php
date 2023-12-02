@@ -91,7 +91,7 @@ Route::get('/my-applications', function (Request $request) {
     return view('myApplications', ['applications' => $applications]);
 });
 
-Route::post('/create-job', [JobController::class, 'createJob']);
+Route::post('/create-job', [JobController::class, 'createJob'])->middleware(IsRecruiter::class);;
 Route::post('/job/send-application/{id}', [JobController::class, 'sendApplication']);
 
 //dashboard
@@ -99,6 +99,6 @@ Route::post('/job/send-application/{id}', [JobController::class, 'sendApplicatio
 Route::get('/dashboard', function (Request $request) {
     $id = Auth::id();
     $company = User::find($id)->company;
-    $company->listings;
+    $listings = $company->listings;
     return view('dashboard', ['company' => $company]);
 })->middleware(IsRecruiter::class);
