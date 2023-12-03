@@ -56,10 +56,12 @@ Route::get('/profile', function (Request $request) {
     $id = Auth::id();
 
     $personalia = User::find($id);
-    $experiences["work"] = User::find($id)->experiences()->where("type", "work")->get();
-    $experiences["education"] = User::find($id)->experiences()->where("type", "education")->get();
-    $experiences["other"] = User::find($id)->experiences()->where("type", "other")->get();
-    return view('profile', ['personalia' => $personalia], ['experiences' => $experiences]);
+    $experiences["work"] = $personalia->experiences()->where("type", "work")->get();
+    $experiences["education"] = $personalia->experiences()->where("type", "education")->get();
+    $experiences["other"] = $personalia->experiences()->where("type", "other")->get();
+    $experiencesCount = $personalia->experiences()->count();
+
+    return view('profile', ['personalia' => $personalia, 'experiencesCount' => $experiencesCount, 'experiences' => $experiences]);
 })->middleware(IsUser::class);
 
 Route::post('/update-user', [UserController::class, 'updateUser']);
