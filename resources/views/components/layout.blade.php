@@ -13,21 +13,32 @@
         </div>
         <nav class="flex-none">
             <ul class="menu menu-horizontal px-1">
-
-                @guest
+                @auth
+                    <li>
+                        Velkommen, {{ auth()->user()->first_name }}
+                    </li>
+                @else
                     <li>
                         <a href="/login">Login</a>
                     </li>
-                @endguest
+
+                @endauth
             </ul>
 
             @auth
                 <div class="dropdown dropdown-end">
-                    <label tabindex="0" class="btn btn-ghost btn-circle avatar placeholder bg-secondary">
+
+                    <div tabindex="0" role="button"
+                        class="btn btn-ghost btn-circle avatar ml-2 @if (!auth()->user()->profile_img_path) placeholder bg-accent @endif">
                         <div class="w-10 rounded-full">
-                            <span>DS</span>
+                            @if (auth()->user()->profile_img_path)
+                                <img src="{{ asset(auth()->user()->profile_img_path) }}" />
+                            @else
+                                <span
+                                    class="uppercase text-xl text-accent-content">{{ mb_substr(auth()->user()->first_name, 0, 1) . mb_substr(auth()->user()->last_name, 0, 1) }}</span>
+                            @endif
                         </div>
-                    </label>
+                    </div>
                     <ul tabindex="0"
                         class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                         <li>
@@ -73,6 +84,7 @@
     <main class="container mx-auto">
         {{ $slot }}
     </main>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

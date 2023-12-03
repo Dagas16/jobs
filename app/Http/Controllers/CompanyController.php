@@ -18,7 +18,7 @@ class CompanyController extends Controller
             "name" => "required",
             "logo" => "required"
         ]);
-        $logoPath = $request->file('logo')->store("image");
+        $logoPath = $request->file('logo')->store('image');
 
         $incomingFields['name'] = strip_tags($incomingFields['name']);
         $incomingFields['logo_path'] = $logoPath;

@@ -8,13 +8,25 @@
                     <div class=" w-96">
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text">Name</span>
+                                <span class="label-text">First Name</span>
                             </label>
-                            <input name="name" type="text" value="{{ old('name') }}"
-                                class="input input-bordered @if ($errors->has('name')) input-error @endif">
+                            <input name="first_name" type="text" value="{{ old('first_name') }}"
+                                class="input input-bordered @if ($errors->has('first_name')) input-error @endif">
                             <div class="label">
-                                @if ($errors->has('name'))
-                                    <span class="label-text-alt text-error">{{ $errors->first('name') }}</span>
+                                @if ($errors->has('first_name'))
+                                    <span class="label-text-alt text-error">{{ $errors->first('first_name') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Last Name</span>
+                            </label>
+                            <input name="last_name" type="text" value="{{ old('last_name') }}"
+                                class="input input-bordered @if ($errors->has('last_name')) input-error @endif">
+                            <div class="label">
+                                @if ($errors->has('last_name'))
+                                    <span class="label-text-alt text-error">{{ $errors->first('last_name') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -32,6 +44,18 @@
                         </div>
                         <div class="form-control">
                             <label class="label">
+                                <span class="label-text">Phone</span>
+                            </label>
+                            <input name="phone" type="text" value="{{ old('phone') }}"
+                                class="input input-bordered @if ($errors->has('phone')) input-error @endif">
+                            <div class="label">
+                                @if ($errors->has('phone'))
+                                    <span class="label-text-alt text-error">{{ $errors->first('phone') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
                                 <span class="label-text">Password</span>
                             </label>
                             <input name="password" type="password"
@@ -43,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-actions flex items-center">
+                    <div class="card-actions items-center justify-end">
                         <button class="btn btn-primary">Register</button>
                     </div>
                 </div>
