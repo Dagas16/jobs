@@ -102,12 +102,25 @@
                                 @foreach ($experiences[$index] as $exp)
                                     <div>
                                         <div class="flex">
-                                            <h3 class="text-2xl font-bold grow">{{ $exp['title'] }}</h3>
-                                            <div class="text-2xl font-bold">{{ $exp['start_date'] }} -
-                                                {{ $exp['end_date'] ?? 'now' }}</div>
+                                            <h3 class="text-2xl font-bold grow">{{ $exp->title }}</h3>
+                                            <div class="text-2xl font-bold">{{ $exp->start_date }} -
+                                                {{ $exp->end_date ?? 'now' }}</div>
                                         </div>
-                                        <h4 class="text-lg italic mb-3">{{ $exp['institution'] }}</h4>
-                                        <p class="text-lg">{{ $exp['description'] }}</p>
+                                        <h4 class="text-lg italic mb-3">{{ $exp->institution }}</h4>
+                                        <p class="text-lg">{{ $exp->institution }}</p>
+                                        <div class="card-actions mt-4 justify-end">
+                                            <a href="/update-experience/{{ $exp->id }}"
+                                                class="btn btn-lg btn-accent">Update</a>
+                                            <form action="/delete-experience/{{ $exp->id }}" method="post">
+                                                @csrf
+
+                                                <button type="submit" class="btn btn-sm btn-error"
+                                                    onclick="return confirm('Confirm deletion of entry.')">Delete
+                                                </button>
+                                            </form>
+
+                                        </div>
+
                                     </div>
                                     @if (!$loop->last)
                                         <div class="divider"></div>

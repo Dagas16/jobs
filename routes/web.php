@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsRecruiter;
 use App\Http\Middleware\IsUser;
 use App\Http\Middleware\Authenticate;
+use App\Models\Experience;
 use Illuminate\Auth\Events\Authenticated;
 
 /*
@@ -66,6 +67,18 @@ Route::get('/profile', function (Request $request) {
 
 Route::post('/update-user', [UserController::class, 'updateUser']);
 Route::post('/create-experience', [UserController::class, 'createExperience']);
+Route::post('/delete-experience/{id}', [UserController::class, 'deleteExperience']);
+
+//update experience
+Route::get('/update-experience/{id}', function (Request $request, int $id) {
+
+    $exp = Experience::find($id);
+
+    return view('/updateExperience', ['exp' => $exp]);
+});
+
+Route::post('/update-experience/{id}', [UserController::class, 'updateExperience']);
+
 
 // job routes
 

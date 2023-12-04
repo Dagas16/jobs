@@ -130,4 +130,43 @@ class UserController extends Controller
 
         return redirect('/profile');
     }
+
+    public function updateExperience(Request $request, int $id)
+    {
+        $exp = Experience::find($id);
+        if ($exp->user_id != auth()->id()) {
+            return redirect('/');
+        }
+
+        $incomingFields = $request->validate([
+            'type' => 'required',
+            'title' => 'required',
+            'institution' => 'required',
+            'description' => 'required',
+            'start_date' => ["required", "date"],
+            'end_date' => ['nullable', 'date'],
+        ]);
+
+        $exp->type = strip_tags($incomingFields["type"]);
+        $exp->title = strip_tags($incomingFields["title"]);
+        $exp->institution = strip_tags($incomingFields["institution"]);
+        $exp->description = strip_tags($incomingFields["description"]);
+        $exp->start_date = strip_tags($incomingFields["start_date"]);
+        // $incomingFields["end_date"] = strip_tags($incomingFields["end_date"]);
+
+
+        // foreach ($incomingFields as $key => $val) {
+        //     $exp->$key = $val;
+        // }
+        $exp->save();
+
+
+        return redirect('/profile');
+    }
+
+    public function deleteExperience(Request $request, int $id)
+    {
+        Experience::destroy($id);
+        return redirect()->back();
+    }
 }
