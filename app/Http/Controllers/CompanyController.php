@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -18,7 +19,9 @@ class CompanyController extends Controller
             "name" => "required",
             "logo" => "required"
         ]);
-        $logoPath = $request->file('logo')->store('image');
+
+        $image = $request->file('logo')->store('public');
+        $logoPath = Storage::url($image);
 
         $incomingFields['name'] = strip_tags($incomingFields['name']);
         $incomingFields['logo_path'] = $logoPath;
