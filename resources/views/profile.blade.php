@@ -108,6 +108,16 @@
                                         </div>
                                         <h4 class="text-lg italic mb-3">{{ $exp['institution'] }}</h4>
                                         <p class="text-lg">{{ $exp['description'] }}</p>
+                                        <form action="/delete-experience/{{ $exp->id }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-accent">Delete
+                                            </button>
+                                        </form>
+                                        <form action="/update-experience/{{ $exp->id }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-accent">Update {{ $exp->id }}
+                                            </button>
+                                        </form>
                                     </div>
                                     @if (!$loop->last)
                                         <div class="divider"></div>

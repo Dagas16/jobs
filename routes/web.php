@@ -66,6 +66,8 @@ Route::get('/profile', function (Request $request) {
 
 Route::post('/update-user', [UserController::class, 'updateUser']);
 Route::post('/create-experience', [UserController::class, 'createExperience']);
+Route::post('/update-experience/{id}', [UserController::class, 'updateExperience']);
+Route::post('/delete-experience/{id}', [UserController::class, 'deleteExperience']);
 
 // job routes
 

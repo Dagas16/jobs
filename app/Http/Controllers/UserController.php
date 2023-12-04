@@ -127,4 +127,25 @@ class UserController extends Controller
 
         return redirect('/profile');
     }
+
+    public function updateExperience(Request $request, int $id)
+    {
+        $incomingFields = $request->validate([
+            'type' => 'required',
+            'title' => 'required',
+            'institution' => 'required',
+            'description' => 'required',
+            'start_date' => ["required", "date"],
+            'end_date' => ['nullable', 'date'],
+        ]);
+
+        Experience::where('id', $id)->update($incomingFields);
+        return redirect()->back();
+    }
+
+    public function deleteExperience(Request $request, int $id)
+    {
+        Experience::destroy($id);
+        return redirect()->back();
+    }
 }
