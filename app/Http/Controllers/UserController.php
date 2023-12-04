@@ -6,6 +6,7 @@ use App\Models\Experience;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\File;
 
@@ -95,7 +96,9 @@ class UserController extends Controller
         ], $errorMessages);
 
         if ($request->profile_img_path != null) {
-            $imgPath = $request->file('profile_img_path')->store('image');
+
+            $image = $request->file('profile_img_path')->store('public');
+            $imgPath = Storage::url($image);
             $incomingFields['profile_img_path'] = $imgPath;
         }
 
