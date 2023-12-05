@@ -52,6 +52,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    public static function getAllSearchers()
+    {
+        return self::whereNull('company_id')->get();
+    }
+
     public function jobApplications(): HasMany
     {
         return $this->hasMany(JobApplication::class);

@@ -47,6 +47,11 @@
                         </li>
                         @isrecruiter
                             <li>
+                                <a class="justify-between" href="/user-search">
+                                    Find job candidate
+                                </a>
+                            </li>
+                            <li>
                                 <a class="justify-between" href="/dashboard">
                                     Dashboard
                                 </a>

@@ -1,4 +1,4 @@
-document.getElementById("add-experience-btn").addEventListener("click", () => {
+document.getElementById("add-experience-btn")?.addEventListener("click", () => {
   const cvForm = document.getElementById("cv-form");
 
   cvForm.classList.toggle("flex");

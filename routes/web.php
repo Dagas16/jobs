@@ -17,6 +17,7 @@ use App\Http\Middleware\IsUser;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\IsSearcher;
 use App\Models\Experience;
+use App\Models\Tag;
 use Illuminate\Auth\Events\Authenticated;
 
 /*
@@ -33,6 +34,12 @@ use Illuminate\Auth\Events\Authenticated;
 Route::get('/', function () {
     $jobs = Job::all();
     return view('home', ['jobs' => $jobs]);
+});
+
+Route::get('/user-search', function () {
+    $users = User::getAllSearchers();
+    $tags = Tag::all();
+    return view('userSearch', ['users' => $users, 'allTags' => $tags]);
 });
 
 // auth routes
