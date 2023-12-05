@@ -29,13 +29,9 @@ use Illuminate\Auth\Events\Authenticated;
 */
 
 Route::get('/', function () {
-    $jobs = Job::leftJoin('companies', 'jobs.company_id', '=', 'companies.id')
-        ->select('jobs.*', 'companies.name as companyName')
-        ->get();
+    $jobs = Job::all();
     return view('home', ['jobs' => $jobs]);
 });
-
-
 
 // auth routes
 Route::get('/login', function () {
@@ -56,9 +52,7 @@ Route::get('/profile', function (Request $request) {
     $id = Auth::id();
 
     $personalia = User::find($id);
-    $experiences["work"] = $personalia->experiences()->where("type", "work")->get();
-    $experiences["education"] = $personalia->experiences()->where("type", "education")->get();
-    $experiences["other"] = $personalia->experiences()->where("type", "other")->get();
+    $experiences = $personalia->experiencesTypeGroups();
     $experiencesCount = $personalia->experiences()->count();
 
     return view('profile', ['personalia' => $personalia, 'experiencesCount' => $experiencesCount, 'experiences' => $experiences]);
@@ -100,11 +94,9 @@ Route::post('/create-job', [JobController::class, 'createJob'])->middleware(IsRe
 Route::post('/job/send-application/{id}', [JobController::class, 'sendApplication']);
 
 //dashboard
-
 Route::get('/dashboard', function (Request $request) {
     $id = Auth::id();
     $company = User::find($id)->company;
-    $listings = $company->listings;
     return view('dashboard', ['company' => $company]);
 })->middleware(IsRecruiter::class);
 
@@ -117,5 +109,17 @@ Route::get('/create-company', function () {
 
     return view('createCompany');
 });
+
+Route::get('/dashboard/job/{jobId}/applications', function (Request $request, int $jobId) {
+    $job = Job::find($jobId);
+    $applications = JobApplication::all()->where("job_id", $jobId);
+    return view('jobApplications', ['job' => $job, 'jobApplications' => $applications]);
+})->middleware(IsRecruiter::class);
+
+Route::get('/dashboard/application/{id}', function (Request $request, int $id) {
+    $application = JobApplication::find($id);
+    return view('application', ['application' => $application]);
+})->middleware(IsRecruiter::class);
+
 
 Route::post('/create-company', [CompanyController::class, 'createCompany']);

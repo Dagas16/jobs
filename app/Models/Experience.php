@@ -23,6 +23,8 @@ class Experience extends Model
 
     protected $casts = [
         "type" => ExperienceTypeEnum::class,
+        'start_date' => 'datetime',
+        'start_date' => 'datetime',
     ];
 
     public function user(): BelongsTo

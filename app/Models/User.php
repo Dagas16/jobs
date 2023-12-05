@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\ExperienceTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -61,6 +62,15 @@ class User extends Authenticatable
         return $this->hasMany(Experience::class);
     }
 
+    public function experiencesTypeGroups()
+    {
+        $experiences["work"] = $this->experiences()->where("type", "work")->get();
+        $experiences["education"] = $this->experiences()->where("type", "education")->get();
+        $experiences["other"] = $this->experiences()->where("type", "other")->get();
+
+        return $experiences;
+    }
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
@@ -69,5 +79,15 @@ class User extends Authenticatable
     public function isRecruiter(): bool
     {
         return User::where('id', Auth::user()->id)->whereNotNull('company_id')->exists();
+    }
+
+    public function higlightedEducation(): ?Experience
+    {
+        return $this->experiences()->whereNull('end_date')->where('type', "=", ExperienceTypeEnum::Education)->first() ?: null;
+    }
+
+    public function higlightedWork(): ?Experience
+    {
+        return $this->experiences()->whereNull('end_date')->where('type', "=", ExperienceTypeEnum::Work)->first() ?: null;
     }
 }
