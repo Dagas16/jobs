@@ -63,6 +63,7 @@ Route::get('/profile', function (Request $request) {
 Route::post('/update-user', [UserController::class, 'updateUser']);
 Route::post('/create-experience', [UserController::class, 'createExperience']);
 Route::post('/delete-experience/{id}', [UserController::class, 'deleteExperience']);
+Route::post('/profile/add-tag', [UserController::class, 'addTag']);
 
 //update experience
 Route::get('/update-experience/{id}', function (Request $request, int $id) {

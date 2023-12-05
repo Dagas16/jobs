@@ -95,4 +95,9 @@ class User extends Authenticatable
     {
         return mb_substr($this->first_name, 0, 1) . mb_substr($this->last_name, 0, 1);
     }
+
+    public function tags(): HasMany
+    {
+        return $this->hasMany(UserTag::class);
+    }
 }

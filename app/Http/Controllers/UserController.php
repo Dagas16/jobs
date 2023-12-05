@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\Tag;
 use App\Models\User;
+use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -165,6 +167,33 @@ class UserController extends Controller
     public function deleteExperience(Request $request, int $id)
     {
         Experience::destroy($id);
+        return redirect()->back();
+    }
+
+    public function addTag(Request $request)
+    {
+        $userId = Auth::id();
+        $incomingFields = $request->validate([
+            'value' => 'required',
+        ]);
+
+        $tagName = strtoupper(strip_tags($incomingFields['value']));
+        $tag = Tag::where('value', $tagName)->first();
+
+        if (!$tag) {
+            $tagData = [
+                'value' => $tagName
+            ];
+
+            $tag = Tag::create($tagData);
+        }
+
+        $userTagData = [
+            'user_id' => $userId,
+            'tag_id' => $tag->id,
+        ];
+        UserTag::create($userTagData);
+
         return redirect()->back();
     }
 }
