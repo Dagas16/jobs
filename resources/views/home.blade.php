@@ -16,13 +16,13 @@
                             @endif
                         </div>
                         <div class="col-span-2">
-                            <p>
-                                {{ $job->description }}
-                            </p>
+                            <div class="mb-5">
+                                {{ $job->short_description }}
+                            </div>
                             <div class="card-actions justify-end">
-                                @if (Auth::check())
+                                @issearcher
                                     <button class="btn btn-primary btn-sm">Apply</button>
-                                @endif
+                                @endissearcher
                             </div>
 
                         </div>

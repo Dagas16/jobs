@@ -155,9 +155,7 @@ class UserController extends Controller
         // $incomingFields["end_date"] = strip_tags($incomingFields["end_date"]);
 
 
-        // foreach ($incomingFields as $key => $val) {
-        //     $exp->$key = $val;
-        // }
+
         $exp->save();
 
 

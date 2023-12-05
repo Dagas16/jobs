@@ -38,7 +38,7 @@
                     <div class="card-actions">
                         <a class="btn btn-sm btn-secondary"
                             href="/dashboard/job/{{ $listing->id }}/applications">Applications</a>
-                        <a class="btn btn-sm btn-secondary">Edit</a>
+                        <a class="btn btn-sm btn-secondary" href="/dashboard/job/{{ $listing->id }}/edit">Edit</a>
                     </div>
                 </div>
             </div>
