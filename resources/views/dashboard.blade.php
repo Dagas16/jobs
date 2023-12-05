@@ -11,7 +11,7 @@
                     <p>Welcome to the dashboard</p>
                 </div>
                 <div class="card-actions">
-                    <a class="btn btn-secondary">Edit company</a>
+                    <a class="btn btn-secondary" href="/create-company">Edit company</a>
                 </div>
             </div>
         </div>

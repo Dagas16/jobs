@@ -33,4 +33,35 @@ class CompanyController extends Controller
 
         return redirect("/dashboard");
     }
+
+    public function editCompany(Request $request)
+    {
+        $id = Auth::id();
+        $user = User::find($id);
+
+        $company = $user->company;
+
+        $incomingFields = $request->validate([
+            "name" => "required",
+            "logo" => "image"
+        ]);
+
+
+        if ($request->logo != null) {
+
+            $image = $request->file('logo')->store('public');
+            $logoPath = Storage::url($image);
+            $company->logo_path = $logoPath;
+        }
+
+
+
+        $company->name = strip_tags($incomingFields['name']);
+
+
+        $company->save();
+
+
+        return redirect("/dashboard");
+    }
 }

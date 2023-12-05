@@ -120,11 +120,14 @@ Route::get('/dashboard', function (Request $request) {
 Route::get('/create-company', function () {
     $id = Auth::id();
     $company = User::find($id)->company;
-    if ($company) {
-        return redirect('/dashboard');
-    }
 
-    return view('createCompany');
+    return view('createCompany', ['company' => $company]);
+});
+
+Route::get('/edit-company', function (Request $request, int $id) {
+    $id = Auth::id();
+    $company = User::find($id)->company;
+    return view('editCompany', ['company' => $company]);
 });
 
 Route::get('/dashboard/job/{jobId}/applications', function (Request $request, int $jobId) {
@@ -145,3 +148,4 @@ Route::get('/dashboard/job/{id}/edit', function (Request $request, int $id) {
 
 Route::post('/dashboard/job/{id}/edit', [JobController::class, 'editJob']);
 Route::post('/create-company', [CompanyController::class, 'createCompany']);
+Route::post('/edit-company', [CompanyController::class, 'editCompany']);
