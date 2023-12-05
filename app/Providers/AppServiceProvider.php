@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             return true;
         });
 
-        Blade::if('isseacher', function () {
+        Blade::if('issearcher', function () {
             $id = Auth::id();
             //sjekker om bruker er logget inn og hører til en bedrift
             if ($id == null || User::find($id)->isRecruiter()) {

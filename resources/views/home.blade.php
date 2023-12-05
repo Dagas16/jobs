@@ -20,9 +20,9 @@
                                 {{ $job->short_description }}
                             </div>
                             <div class="card-actions justify-end">
-                                @isseacher
+                                @issearcher
                                     <button class="btn btn-primary btn-sm">Apply</button>
-                                @endisseacher
+                                @endissearcher
                             </div>
 
                         </div>
