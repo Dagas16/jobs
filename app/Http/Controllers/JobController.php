@@ -27,6 +27,29 @@ class JobController extends Controller
         return redirect("/dashboard");
     }
 
+    public function editJob(Request $request, $id)
+    {
+        $job = Job::find($id);
+        if ($job->company_id != auth()->user()->company_id) {
+            return redirect('/');
+        }
+
+        $incomingFields = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'deadline' => ["required", "date"],
+        ]);
+
+        $job->title = strip_tags($incomingFields["title"]);
+        $job->description = strip_tags($incomingFields["description"]);
+        $job->deadline = strip_tags($incomingFields["deadline"]);
+
+        $job->save();
+
+
+        return redirect('/dashboard');
+    }
+
     public function sendApplication(Request $request, string $id)
     {
         $incomingFields = $request->validate([

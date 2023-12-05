@@ -91,6 +91,8 @@ Route::get("/job/{id}/success", function (Request $request, string $id) {
 });
 
 
+
+
 Route::get('/create-job', function () {
     $companies = Company::all();
     return view('createJob', ['companies' => $companies]);
@@ -134,5 +136,10 @@ Route::get('/dashboard/application/{id}', function (Request $request, int $id) {
     return view('application', ['application' => $application]);
 })->middleware(IsRecruiter::class);
 
+Route::get('/dashboard/job/{id}/edit', function (Request $request, int $id) {
+    $job = Job::find($id);
+    return view('editJob', ['job' => $job]);
+});
 
+Route::post('/dashboard/job/{id}/edit', [JobController::class, 'editJob']);
 Route::post('/create-company', [CompanyController::class, 'createCompany']);
