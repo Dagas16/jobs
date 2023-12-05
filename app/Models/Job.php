@@ -11,7 +11,11 @@ class Job extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["title", "description", "deadline", "company_id"];
+    protected $fillable = ["title", "short_description", "description", "deadline", "company_id"];
+
+    protected $casts = [
+        'deadline' => 'datetime',
+    ];
 
     public function applications(): HasMany
     {

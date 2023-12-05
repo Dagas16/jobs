@@ -13,10 +13,17 @@
                         <input type="text" name="title" class="input input-bordered">
                     </div>
                     <div class="form-control">
+                        <label for="short_description" class="label">
+                            <span class="label-text">Short Description</span>
+                        </label>
+                        <textarea name="short_description" class="textarea textarea-bordered"></textarea>
+                    </div>
+
+                    <div class="form-control">
                         <label for="description" class="label">
                             <span class="label-text">Description</span>
                         </label>
-                        <textarea name="description" class="textarea textarea-bordered"></textarea>
+                        <textarea name="description" class="textarea textarea-bordered" rows="10"></textarea>
                     </div>
 
                     <div class="form-control">
@@ -25,9 +32,6 @@
                         </label>
                         <input type="date" name="deadline" class="input input-bordered">
                     </div>
-
-
-
                 </div>
 
                 <div class="card-actions">
