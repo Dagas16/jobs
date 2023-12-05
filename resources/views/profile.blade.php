@@ -95,7 +95,32 @@
                 </form>
             </div>
         </div>
+
         @issearcher
+            <div class="card bg-base-200">
+                <div class="card-body">
+                    <h2 class="card-title">Skills</h2>
+                    <div class="flex items-center gap-5">
+                        <div class="flex gap-2">
+                            @foreach ($personalia->tags as $skill)
+                                <div class="rounded-full py-2 px-5 font-semibold text-xl bg-primary text-primary-content">
+                                    <span>
+                                        {{ $skill->tag->value }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
+                        <form action="/profile/add-tag" method="POST" class="flex items-center mb-0">
+                            @csrf
+                            <div class="flex gap-2 items-center">
+                                <input type="text" name="value"
+                                    class="input input-bordered @if ($errors->has('skill')) input-error @endif">
+                                <button class="btn btn-accent" type="submit">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card bg-base-200">
                 <div class="card-body flex flex-col gap-5">
                     <div class="flex">
