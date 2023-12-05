@@ -8,8 +8,7 @@
                             class="text-secondary">{{ $application['job']['title'] }}</span></h2>
                     <p class="mb-10">{{ $application['job']['description'] }}</p>
                     <div class=" border-primary border-4 p-4 rounded-3xl">
-                        <h3 class="text-2xl font-bold">Your application</h3>
-                        <p>{{ $application['cover_letter'] }}
+                        <p class="whitespace-pre-wrap">{{ $application['cover_letter'] }}</p>
                     </div>
                 </div>
 

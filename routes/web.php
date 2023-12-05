@@ -82,7 +82,9 @@ Route::get('/job/{id}', function (Request $request, string $id) {
         ->select('jobs.*', 'companies.name as company_name', 'companies.logo_path as company_logo_path')
         ->where('jobs.id', $id)
         ->first();
-    return view('job', ['job' => $job]);
+
+    $userApplication = JobApplication::where(['user_id' =>  Auth::id(), 'job_id' => $id])->first();
+    return view('job', ['job' => $job, 'userApplication' => $userApplication]);
 });
 
 Route::get("/job/{id}/success", function (Request $request, string $id) {
