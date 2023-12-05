@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsRecruiter;
 use App\Http\Middleware\IsUser;
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\IsSearcher;
 use App\Models\Experience;
 use Illuminate\Auth\Events\Authenticated;
 
@@ -108,7 +109,7 @@ Route::get('/my-applications', function (Request $request) {
 });
 
 Route::post('/create-job', [JobController::class, 'createJob'])->middleware(IsRecruiter::class);;
-Route::post('/job/send-application/{id}', [JobController::class, 'sendApplication']);
+Route::post('/job/send-application/{id}', [JobController::class, 'sendApplication'])->middleware(IsSearcher::class);
 
 //dashboard
 Route::get('/dashboard', function (Request $request) {

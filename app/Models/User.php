@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->experiences()->whereNull('end_date')->where('type', "=", ExperienceTypeEnum::Work)->first() ?: null;
     }
+
+    public function initials(): string
+    {
+        return mb_substr($this->first_name, 0, 1) . mb_substr($this->last_name, 0, 1);
+    }
 }

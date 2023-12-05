@@ -4,10 +4,21 @@
         @foreach ($jobApplications as $application)
             <div class="card bg-base-200">
                 <div class="card-body">
-                    <div class="flex">
-                        <div class="w-[100px]">
-                            <img src="{{ asset($application->user->profile_img_path) }}"
-                                class="max-w-[100px] max-h-[100px] rounded-lg" />
+                    <div class="flex gap-5">
+                        <div class="w-24">
+                            @if ($application->user->profile_img_path)
+                                <div class="avatar">
+                                    <div class="w-24 rounded-full">
+                                        <img src="{{ asset($application->user->profile_img_path) }}" />
+                                    </div>
+                                </div>
+                            @else
+                                <div class="avatar placeholder">
+                                    <div class="bg-neutral text-neutral-content rounded-full w-24">
+                                        <span class="text-4xl">{{ $application->user->initials() }}</span>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         <div>
                             <h2 class="text-2xl font-bold">
@@ -30,36 +41,6 @@
                     <div class="card-actions justify-end">
                         <a class="btn btn-accent" href="/dashboard/application/{{ $application->id }}">Open</a>
                     </div>
-                    {{-- <div class="hidden flex-col gap-8">
-                        @php($experiences = $application->user->experiencesTypeGroups())
-                        @foreach ($experiences as $index => $val)
-                            @if (count($experiences[$index]) > 0)
-                                <div>
-                                    <h3 class="text-4xl font-extrabold text-secondary grow -mb-1.5 text-right mr-4">
-                                        {{ $index }}
-                                    </h3>
-
-                                    <div class="border-4 border-secondary p-4 card">
-                                        @foreach ($experiences[$index] as $exp)
-                                            <div>
-                                                <div class="flex">
-                                                    <h3 class="text-2xl font-bold grow">{{ $exp['title'] }}</h3>
-                                                    <div class="text-2xl font-bold">{{ $exp['start_date'] }} -
-                                                        {{ $exp['end_date'] ?? 'now' }}</div>
-                                                </div>
-                                                <h4 class="text-lg italic mb-3">{{ $exp['institution'] }}</h4>
-                                                <p class="text-lg">{{ $exp['description'] }}</p>
-                                            </div>
-                                            @if (!$loop->last)
-                                                <div class="divider"></div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div> --}}
-
                 </div>
             </div>
         @endforeach

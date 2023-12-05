@@ -34,8 +34,7 @@
                             @if (auth()->user()->profile_img_path)
                                 <img src="{{ asset(auth()->user()->profile_img_path) }}" />
                             @else
-                                <span
-                                    class="uppercase text-xl text-accent-content">{{ mb_substr(auth()->user()->first_name, 0, 1) . mb_substr(auth()->user()->last_name, 0, 1) }}</span>
+                                <span class="uppercase text-xl text-accent-content">{{ auth()->user()->initials() }}</span>
                             @endif
                         </div>
                     </div>
@@ -64,8 +63,6 @@
                                 </a>
                             </li>
                         @endisrecruiter
-
-                        <li><a>Settings</a></li>
                         <li>
                             <form action="/logout" method="POST">
                                 @csrf

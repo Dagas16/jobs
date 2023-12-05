@@ -6,10 +6,20 @@
             <div class="card-body">
                 <div class="flex gap-16">
                     @php($applicant = $application->user)
-                    <div class="w-[250px]
-                    h-[250px] overflow-hidden">
-                        <img class="rounded-xl w-[250px] h-[250px] object-cover"
-                            src="{{ asset($applicant->profile_img_path) }}" />
+                    <div>
+                        @if ($application->user->profile_img_path)
+                            <div class="avatar">
+                                <div class="w-36 rounded-full">
+                                    <img src="{{ asset($application->user->profile_img_path) }}" />
+                                </div>
+                            </div>
+                        @else
+                            <div class="avatar placeholder">
+                                <div class="bg-neutral text-neutral-content rounded-full w-36">
+                                    <span class="text-6xl">{{ $application->user->initials() }}</span>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="flex flex-col justify-center">
                         <div class="flex flex-col gap-1">
