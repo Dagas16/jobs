@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Routing\Controllers\Middleware;
 
-class IsRecruiter
+class IsSearcher
 {
     /**
      * Handle an incoming request.
